@@ -29,8 +29,8 @@ public class Solution {
         /*Connection conn = null;
         PreparedStatement pst = null;
         String url = "jdbc:mysql://localhost:3306/mysql";
-        String user = "root";
-        String password = "6pefwgb";
+        String user = "";
+        String password = "";
         try {
             conn = DriverManager.getConnection(url, user, password);
             System.out.println("Connection Done");
