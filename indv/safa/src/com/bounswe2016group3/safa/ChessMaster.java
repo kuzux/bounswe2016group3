@@ -32,10 +32,10 @@ public class ChessMaster {
 
     @Override
     public String toString() {
-        String description = "";
-        description += name + "\n";
-        description += title + "\n";
-        if(ELO != 0) description += Integer.toString(ELO) + "\n";
+        String description = "(";
+        description += name + ",";
+        description += title + ",";
+        if(ELO != 0) description += Integer.toString(ELO) + ")";
         return description;
     }
 }

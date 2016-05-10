@@ -24,7 +24,12 @@ public class DataSPARQL extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ArrayList<ChessMaster> data = getData();
-        Database.push(data);
+        try {
+            Database.createDataTable();
+            Database.push(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
         try(PrintWriter writer = response.getWriter()) {
