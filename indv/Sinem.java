@@ -13,10 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 
 import com.google.gson.Gson;
@@ -41,7 +38,7 @@ public class Sinem extends HttpServlet {
     final static String base = "https://query.wikidata.org/sparql?query=";
     static final String DRIVER = "com.mysql.jdbc.Driver";
     static final String URL = "jdbc:mysql://localhost:3306/sinem_database";
-    static final String user = "root";
+    static final String user = "";
     static final String PASS = "";
     static Connection conn = null;
     static Statement stmt = null;
@@ -59,7 +56,7 @@ public class Sinem extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         response.setContentType("text/html");
-
+      //  request.getRequestDispatcher("/Users/sinem/IdeaProjects/Deneme/out/artifacts/Sinem_war_exploded/index.jsp").forward(request, response);
         String requestType = request.getParameter("type");
         PrintWriter out = response.getWriter();
         String inputTerm = request.getParameter("input");
@@ -105,11 +102,12 @@ public class Sinem extends HttpServlet {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        String[] names=new String[20];
+        String[] yob=new String[20];
+        String[] yod=new String[20];
         try {
             JSONArray myJSONarray = myJSONobject2.getJSONArray("bindings");
-            String[] names=new String[20];
-            String[] yob=new String[20];
-            String[] yod=new String[20];
+
             for(int i = 0; i<myJSONarray.length();i++){
                 JSONObject tempRecord = myJSONarray.getJSONObject(i);
                 String name = tempRecord.getJSONObject("humanLabel").getString("value");
@@ -128,12 +126,29 @@ public class Sinem extends HttpServlet {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-       initialize();
+      //  System.out.println("Problem????");
+      initialize();
+      createTable();
+        for(int i=0;i<20;i++){
+
+            String sql = "INSERT INTO sinem_data (`name`, `yob`, `yod`) VALUES (\""+names[i]+"\",\""+yob[i]+"\",\""+yod[i]+"\")";
+            System.out.println(sql);
+            try {
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.execute();
+
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+
+            }
+        }
     }
     public static void initialize(){
         if(stmt != null && conn != null) return;
         try {
             Class.forName(DRIVER);
+            System.out.println("dsdad");
             conn = DriverManager.getConnection(URL,user,PASS);
             stmt = conn.createStatement();
         } catch (ClassNotFoundException e) {
@@ -142,6 +157,21 @@ public class Sinem extends HttpServlet {
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        }
+        System.out.println("Done...");
+    }
+    public static boolean createTable(){
+        initialize();
+        String sql = "CREATE TABLE sinem_data (name varchar(255), yob varchar(255), yod varchar(255))";
+      //  System.out.println(sql);
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
         }
     }
     /**
