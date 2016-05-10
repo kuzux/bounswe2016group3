@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <servlet>
+        <servlet-name>DataReceiver</servlet-name>
+        <servlet-class>DataReceiver</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DataReceiver</servlet-name>
+        <url-pattern>/DataReceiver</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ShowResults</servlet-name>
+        <servlet-class>ShowResults</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowResults</servlet-name>
+        <url-pattern>/ShowResults</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SaveData</servlet-name>
+        <servlet-class>SaveData</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SaveData</servlet-name>
+        <url-pattern>/SaveData</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteData</servlet-name>
+        <servlet-class>DeleteData</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteData</servlet-name>
+        <url-pattern>/DeleteData</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MyData</servlet-name>
+        <servlet-class>MyData</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyData</servlet-name>
+        <url-pattern>/MyData</url-pattern>
+    </servlet-mapping>
+
+</web-app>
