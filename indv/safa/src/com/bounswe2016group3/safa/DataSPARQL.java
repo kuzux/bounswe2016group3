@@ -9,11 +9,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by sand94 on 10.05.2016.
@@ -26,13 +24,14 @@ public class DataSPARQL extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ArrayList<ChessMaster> data = getData();
+        Database.push(data);
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
         try(PrintWriter writer = response.getWriter()) {
             writer.println("<!DOCTYPE html><html>");
             writer.println("<head>");
             writer.println("<meta charset=\"UTF-8\" />");
-            writer.println("<title>MyServlet.java:doGet(): Servlet code!</title>");
+            writer.println("<title>Obey Your Master</title>");
             writer.println("</head>");
             writer.println("<body>");
             for(ChessMaster master : data) {
