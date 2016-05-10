@@ -13,5 +13,6 @@
   <body>
     <h1>Simple Java App Demo</h1>
     <p>To invoke the Java Servlet click <a href="Servlet">here</a></p>
+    <p><a href="DataSPARQL">Nice...</a></p>
   </body>
 </html>
